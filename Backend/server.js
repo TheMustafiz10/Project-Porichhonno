@@ -26,7 +26,7 @@ app.use('/api/suraiya/ai-assistant', suraiyaAiRoutes);
 app.use('/api/suraiya/admin/ai-logs', suraiyaAiAdminRoutes);
 app.use('/api/profile', suraiyaProfileRoutes);
 
-const PORT = Number(process.env.PORT) || 5000;
+const PORT = Number(process.env.PORT) || 1313;
 const MONGODB_URI = process.env.MONGODB_URI;
 
 if (!MONGODB_URI) {
