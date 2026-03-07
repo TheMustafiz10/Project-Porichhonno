@@ -1,0 +1,75 @@
+.earnings-section {
+  padding: 2rem;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.earnings-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.earnings-card {
+  background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-secondary) 100%);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.earnings-points {
+  flex-shrink: 0;
+  text-align: center;
+  padding: 1rem 1.5rem;
+  background: rgba(245, 197, 24, 0.15);
+  border-radius: 12px;
+  border: 1px solid rgba(245, 197, 24, 0.3);
+}
+
+.points-value {
+  display: block;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--accent-gold);
+}
+
+.points-label {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.earnings-details {
+  flex: 1;
+}
+
+.earnings-details p {
+  margin-bottom: 0.25rem;
+  font-size: 0.95rem;
+}
+
+.earnings-details .neighborhood {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.earnings-details .rank-badge {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--accent-gold);
+  font-weight: 500;
+}
+
+.earnings-loading,
+.earnings-error {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-secondary);
+}
+
+.earnings-error {
+  color: var(--error);
+}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Leaderboard from './components/Leaderboard';
 import EarningsView from './components/EarningsView';
 import RedeemPoints from './components/RedeemPoints';
@@ -10,7 +10,7 @@ const VIEWS = {
   redeem: 'redeem',
 };
 
-// Demo users (IDs must match your backend store.js user ids)
+// Demo users for testing (matches backend data)
 const DEMO_USERS = [
   { id: '1', name: 'Alice Johnson', type: 'resident' },
   { id: '2', name: 'Bob Smith', type: 'resident' },
@@ -20,7 +20,7 @@ const DEMO_USERS = [
   { id: '7', name: 'Grace Chen', type: 'volunteer' },
 ];
 
-function App() {
+export default function App() {
   const [currentView, setCurrentView] = useState(VIEWS.leaderboard);
   const [userId, setUserId] = useState(() => localStorage.getItem('userId') || '1');
 
@@ -86,5 +86,3 @@ function App() {
     </div>
   );
 }
-
-export default App;
