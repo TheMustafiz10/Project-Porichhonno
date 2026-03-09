@@ -29,7 +29,7 @@ export default function SuraiyaAiAssistant() {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const bottomRef = useRef(null);
-  const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+  const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:1313/api";
 
   // Auto-scroll to the bottom of the chat
   useEffect(() => {
@@ -53,11 +53,18 @@ export default function SuraiyaAiAssistant() {
 
     // 2. Talk to your REAL Gemini Backend
     try {
+      console.log('📤 Sending request to:', `${API_BASE}/suraiya/ai-assistant/ask`);
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 15000); // 15 second timeout
+      
       const response = await fetch(`${API_BASE}/suraiya/ai-assistant/ask`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userId: "suraiya_test_user_1", question: text }),
+        signal: controller.signal,
       });
+      
+      clearTimeout(timeoutId);
 
       const data = await response.json();
       const backendMessage = String(data?.message || '').toLowerCase();
@@ -102,11 +109,23 @@ export default function SuraiyaAiAssistant() {
         ]);
       }
     } catch (error) {
-      console.error("Failed to fetch:", error);
+      console.error("Request Failed:", error);
+      console.error("Error Name:", error.name);
+      console.error("Error Message:", error.message);
+      
+      let errorMsg = "🚨 Error: Could not connect to the backend server.";
+      if (error.name === 'AbortError') {
+        errorMsg += " (Request timeout - backend may be slow)";
+      } else if (error instanceof TypeError && error.message.includes('Failed to fetch')) {
+        errorMsg += " Is your Node.js server running on port 1313?";
+      } else {
+        errorMsg += ` (${error.message})`;
+      }
+      
       setMessages((prev) => [...prev, { 
         id: Date.now() + 1, 
         role: 'assistant', 
-        content: "🚨 Error: Could not connect to the backend server. Is your Node.js server running on port 5000?" 
+        content: errorMsg
       }]);
     } finally {
       // Always turn off loading state

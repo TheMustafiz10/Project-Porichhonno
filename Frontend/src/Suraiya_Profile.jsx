@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 // IMPORTANT: Replace this with an actual _id from your MongoDB once you create a user.
 const TEST_USER_ID = '69abc778a3cbe96cddfa4b11';
-const API_URL = `http://localhost:5000/api/profile/${TEST_USER_ID}`;
+const API_URL = `http://localhost:1313/api/profile/${TEST_USER_ID}`;
 
 export default function Suraiya_Profile() {
   const [user, setUser] = useState({

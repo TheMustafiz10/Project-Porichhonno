@@ -60,3 +60,46 @@ export const updateSuraiyaProfile = async (req, res) => {
     return res.status(500).json({ success: false, message: 'Server error' });
   }
 };
+
+export const createSuraiyaProfile = async (req, res) => {
+  try {
+    const { name, email, phone, location, bio } = req.body;
+
+    if (!name || !email) {
+      return res.status(400).json({
+        success: false,
+        message: 'Name and email are required fields',
+      });
+    }
+
+    const existingUser = await SuraiyaProfile.findOne({ email });
+    if (existingUser) {
+      return res.status(409).json({
+        success: false,
+        message: 'User with this email already exists',
+      });
+    }
+
+    const newUser = await SuraiyaProfile.create({
+      name,
+      email,
+      phone: phone || '',
+      location: location || '',
+      bio: bio || '',
+      totalRecycledItems: 0,
+      ecoPoints: 0,
+    });
+
+    return res.status(201).json({
+      success: true,
+      message: 'User profile created successfully',
+      data: newUser,
+    });
+  } catch (error) {
+    console.error('Create Profile Error:', error);
+    return res.status(500).json({
+      success: false,
+      message: 'Failed to create user profile',
+    });
+  }
+};

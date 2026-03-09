@@ -1,0 +1,281 @@
+{
+	"info": {
+		"_postman_id": "suraiya-porichhonno-apis",
+		"name": "Porichhonno - Suraiya's Features",
+		"description": "REST APIs for AI Waste Assistant and User Profile Management",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Feature 1: AI Waste Assistant",
+			"item": [
+				{
+					"name": "1.1 Ask AI Assistant",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"userId\": \"suraiya_test_user_1\",\n  \"question\": \"How do I recycle plastic bottles?\",\n  \"sessionId\": \"session_123\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:1313/api/suraiya/ai-assistant/ask",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1313",
+							"path": [
+								"api",
+								"suraiya",
+								"ai-assistant",
+								"ask"
+							]
+						},
+						"description": "User asks a question about waste sorting and receives AI-powered response"
+					}
+				},
+				{
+					"name": "1.2 Get User History",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:1313/api/suraiya/ai-assistant/history/suraiya_test_user_1?page=1&limit=10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1313",
+							"path": [
+								"api",
+								"suraiya",
+								"ai-assistant",
+								"history",
+								"suraiya_test_user_1"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						},
+						"description": "Retrieve all past conversations for a specific user"
+					}
+				},
+				{
+					"name": "1.3 Submit Feedback",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"isHelpful\": true\n}"
+						},
+						"url": {
+							"raw": "http://localhost:1313/api/suraiya/ai-assistant/feedback/:conversationId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1313",
+							"path": [
+								"api",
+								"suraiya",
+								"ai-assistant",
+								"feedback",
+								":conversationId"
+							],
+							"variable": [
+								{
+									"key": "conversationId",
+									"value": "69ae59a03feafaa54ee27ec3",
+									"description": "Replace with actual conversation ID from Ask AI Assistant response"
+								}
+							]
+						},
+						"description": "User submits feedback (helpful/not helpful) on an AI response"
+					}
+				}
+			]
+		},
+		{
+			"name": "Feature 2: User Profile Management",
+			"item": [
+				{
+					"name": "2.1 Create User Profile",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Test User\",\n  \"email\": \"testuser@example.com\",\n  \"phone\": \"+880 1234567890\",\n  \"location\": \"Dhaka, Bangladesh\",\n  \"bio\": \"New eco-conscious user!\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:1313/api/profile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1313",
+							"path": [
+								"api",
+								"profile"
+							]
+						},
+						"description": "Create a new user profile in the system"
+					}
+				},
+				{
+					"name": "2.2 Get User Profile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:1313/api/profile/:userId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1313",
+							"path": [
+								"api",
+								"profile",
+								":userId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "69abc778a3cbe96cddfa4b11",
+									"description": "Replace with actual user ID from Create Profile response"
+								}
+							]
+						},
+						"description": "Retrieve user profile information including eco stats"
+					}
+				},
+				{
+					"name": "2.3 Update User Profile",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Updated Name\",\n  \"phone\": \"+880 9876543210\",\n  \"location\": \"Chittagong, Bangladesh\",\n  \"bio\": \"Environmental activist passionate about sustainable living.\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:1313/api/profile/:userId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1313",
+							"path": [
+								"api",
+								"profile",
+								":userId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "69abc778a3cbe96cddfa4b11",
+									"description": "Replace with actual user ID"
+								}
+							]
+						},
+						"description": "Update user profile information (name, phone, location, bio)"
+					}
+				}
+			]
+		},
+		{
+			"name": "BONUS: Admin AI Logs",
+			"item": [
+				{
+					"name": "3.1 Get All AI Logs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:1313/api/suraiya/admin/ai-logs?page=1&limit=10&category=recyclable",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1313",
+							"path": [
+								"api",
+								"suraiya",
+								"admin",
+								"ai-logs"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "category",
+									"value": "recyclable"
+								}
+							]
+						},
+						"description": "Admin retrieves all AI conversation logs with filtering and pagination"
+					}
+				},
+				{
+					"name": "3.2 Get Analytics",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:1313/api/suraiya/admin/ai-logs/analytics",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1313",
+							"path": [
+								"api",
+								"suraiya",
+								"admin",
+								"ai-logs",
+								"analytics"
+							]
+						},
+						"description": "Get analytics and statistics about AI assistant usage"
+					}
+				}
+			]
+		}
+	]
+}
